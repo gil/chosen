@@ -24,6 +24,16 @@ class Chosen extends AbstractChosen
   finish_setup: ->
     @form_field_jq.addClass "chzn-done"
 
+
+  updatePosition: ->
+    return if @dropdown.offset().left < 0
+    dd_top = if @is_multiple then @container.height() else (@container.height() - 1)
+    offset = @container.offset()
+    @dropdown.css {
+      "top": (offset.top + dd_top) + "px",
+      "left": offset.left + "px"
+    }
+
   set_up_html: ->
     @container_id = if @form_field.id.length then @form_field.id.replace(/[^\w]/g, '_') else this.generate_field_id()
     @container_id += "_chzn"
@@ -50,6 +60,11 @@ class Chosen extends AbstractChosen
     dd_width = (@f_width - get_side_border_padding(@dropdown))
 
     @dropdown.css({"width": dd_width  + "px", "top": dd_top + "px"})
+
+    $('.chz-scroll').scroll =>
+      @updatePosition()
+    $(window).scroll =>
+      @updatePosition()
 
     @search_field = @container.find('input').first()
     @search_results = @container.find('ul.chzn-results').first()

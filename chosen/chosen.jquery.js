@@ -326,8 +326,22 @@ Copyright (c) 2011 by Harvest
       return this.form_field_jq.addClass("chzn-done");
     };
 
+    Chosen.prototype.updatePosition = function() {
+      var dd_top, offset;
+      if (this.dropdown.offset().left < 0) {
+        return;
+      }
+      dd_top = this.is_multiple ? this.container.height() : this.container.height() - 1;
+      offset = this.container.offset();
+      return this.dropdown.css({
+        "top": (offset.top + dd_top) + "px",
+        "left": offset.left + "px"
+      });
+    };
+
     Chosen.prototype.set_up_html = function() {
-      var container_div, dd_top, dd_width, sf_width;
+      var container_div, dd_top, dd_width, sf_width,
+        _this = this;
       this.container_id = this.form_field.id.length ? this.form_field.id.replace(/[^\w]/g, '_') : this.generate_field_id();
       this.container_id += "_chzn";
       this.f_width = this.form_field_jq.outerWidth();
@@ -350,6 +364,12 @@ Copyright (c) 2011 by Harvest
       this.dropdown.css({
         "width": dd_width + "px",
         "top": dd_top + "px"
+      });
+      $('.chz-scroll').scroll(function() {
+        return _this.updatePosition();
+      });
+      $(window).scroll(function() {
+        return _this.updatePosition();
       });
       this.search_field = this.container.find('input').first();
       this.search_results = this.container.find('ul.chzn-results').first();
