@@ -1280,7 +1280,15 @@
 
     <h2>Overflow Support</h2>
     <div class="side-by-side clearfix">
+
       <p>Support for areas with <code>overflow:auto</code> by rendering Chosen dropdown on page body.</p>
+
+      <p>If the parent node is not the <code>overflow:auto</code> div, you can still detect scroll events by doing:</p>
+      <code>$(".chzn-select").chosen({ overflow_container: $(".my-div") });</code>
+
+      <p>Or disable scroll handling:</p>
+      <code>$(".chzn-select").chosen({ overflow_container: false });</code>
+
       <div class="side-by-side clearfix" style="overflow:auto; max-height: 100px; margin-top: 20px; border: 1px solid #DADADA; padding: 10px;">
 
         This area has a scrollbar!<br/><br/>
