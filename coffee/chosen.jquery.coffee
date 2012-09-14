@@ -55,7 +55,7 @@ class Chosen extends AbstractChosen
     @dropdown.css({"width": dd_width  + "px", "top": dd_top + "px"})
 
     if @overflow_container
-      $( @overflow_container ).on "scroll", (evt) => @update_position(evt)
+      $( @overflow_container ).bind "scroll", (evt) => @update_position(evt)
 
     @search_field = @container.find('input').first()
     @search_results = @container.find('ul.chzn-results').first()
@@ -420,7 +420,7 @@ class Chosen extends AbstractChosen
 
     if not @form_field.options[result_data.options_index].disabled
       result_data.selected = false
-      
+
       @form_field.options[result_data.options_index].selected = false
       result = $("#" + @container_id + "_o_" + pos)
       result.removeClass("result-selected").addClass("active-result").show()
@@ -430,7 +430,7 @@ class Chosen extends AbstractChosen
 
       @form_field_jq.trigger "change", {deselected: @form_field.options[result_data.options_index].value}
       this.search_field_scale()
-      
+
       return true
     else
       return false

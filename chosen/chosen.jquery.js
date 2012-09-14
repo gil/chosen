@@ -358,7 +358,7 @@ Copyright (c) 2011 by Harvest
         "top": dd_top + "px"
       });
       if (this.overflow_container) {
-        $(this.overflow_container).on("scroll", function(evt) {
+        $(this.overflow_container).bind("scroll", function(evt) {
           return _this.update_position(evt);
         });
       }
