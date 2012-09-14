@@ -236,33 +236,36 @@ class Chosen extends AbstractChosen
       @form_field_jq.trigger("liszt:maxselected", {chosen: this})
       return false
 
-    dd_top = if @is_multiple then @container.height() else (@container.height() - 1)
-    offset = @container.offset()
-    @form_field_jq.trigger("liszt:showing_dropdown", {chosen: this})
-    @dropdown.css {
-      "top": (offset.top + dd_top) + "px",
-      "left": offset.left + "px",
-      "width": (@container.outerWidth(true) - 2) + "px", # 2px of border
-      "maxHeight": "99999px",
-      "display": "block"
-    }
-
-    @search_results.css("maxHeight", "240px")
-
-    # Fix maximum size
-    realDropdownTop = @dropdown.offset().top - $(window).scrollTop()
-    maxHeight = $(window).height() - realDropdownTop
-    maxHeight = 240 if maxHeight > 240
-    maxHeight = 100 if maxHeight < 100
-    @dropdown.css("maxHeight", maxHeight + "px")
-    @search_results.css("maxHeight", ( maxHeight - @search_container.height() - 10 ) + "px")
-
     @results_showing = true
 
+    @update_position()
     @search_field.focus()
     @search_field.val @search_field.val()
 
     this.winnow_results()
+
+  update_position: ->
+    if @results_showing
+      dd_top = if @is_multiple then @container.height() else (@container.height() - 1)
+      offset = @container.offset()
+      @form_field_jq.trigger("liszt:showing_dropdown", {chosen: this})
+      @dropdown.css {
+        "top": (offset.top + dd_top) + "px",
+        "left": offset.left + "px",
+        "width": (@container.outerWidth(true) - 2) + "px", # 2px of border
+        "maxHeight": "99999px",
+        "display": "block"
+      }
+
+      @search_results.css("maxHeight", "240px")
+
+      # Fix maximum size
+      realDropdownTop = @dropdown.offset().top - $(window).scrollTop()
+      maxHeight = $(window).height() - realDropdownTop
+      maxHeight = 240 if maxHeight > 240
+      maxHeight = 100 if maxHeight < 100
+      @dropdown.css("maxHeight", maxHeight + "px")
+      @search_results.css("maxHeight", ( maxHeight - @search_container.height() - 10 ) + "px")
 
   results_hide: ->
     @selected_item.removeClass "chzn-single-with-drop" unless @is_multiple
