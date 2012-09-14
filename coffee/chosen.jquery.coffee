@@ -574,9 +574,7 @@ class Chosen extends AbstractChosen
         w = @f_width - 10
 
       @search_field.css({'width': w + 'px'})
-
-      dd_top = @container.height()
-      @dropdown.css({"top":  dd_top + "px"})
+      @update_position()
 
   generate_random_id: ->
     string = "sel" + this.generate_random_char() + this.generate_random_char() + this.generate_random_char()
