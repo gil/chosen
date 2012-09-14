@@ -9,7 +9,7 @@ http://harvesthq.github.com/chosen
 
 ### Fork Changes
 
-I've forked this project to render Chosen dropdown on page body, allowing Chosen to be used inside areas with `overflow:hidden`. This problem is very common, as you can see on [Issue #86](https://github.com/harvesthq/chosen/issues/86), but fixing it is not so easy.
+I've forked this project to render Chosen dropdown with fixed position, allowing Chosen to be used inside areas with `overflow:hidden`. This problem is very common, as you can see on [Issue #86](https://github.com/harvesthq/chosen/issues/86), but fixing it is not so easy.
 
 ### Fork ToDo
 
