@@ -1278,6 +1278,47 @@
       </div>
     </div>
 
+    <h2>Overflow Support</h2>
+    <div class="side-by-side clearfix">
+      <p>Support for areas with <code>overflow:auto</code> by rendering Chosen dropdown on page body.</p>
+      <div class="side-by-side clearfix" style="overflow:auto; max-height: 100px; margin-top: 20px; border: 1px solid #DADADA; padding: 10px;">
+
+        This area has a scrollbar!<br/><br/>
+        And you can see that Chosen is still working even when you need to scroll this div.</br><br/>
+        Try it:<br/>
+
+        <select data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chzn-select" tabindex="7">
+          <option value=""></option>
+          <option>American Black Bear</option>
+          <option>Asiatic Black Bear</option>
+          <option>Brown Bear</option>
+          <option>Giant Panda</option>
+          <option selected>Sloth Bear</option>
+          <option>Sun Bear</option>
+          <option>Polar Bear</option>
+          <option>Spectacled Bear</option>
+        </select>
+
+        <br/></br><br/>
+        And if you keep scrolling...<br/><br/>
+        and scrolling...</br><br/>
+        You'll find another combo. And it's working too!<br/><br/>
+
+        <select data-placeholder="Your Favorite Type of Bear" style="width:350px;" class="chzn-select-deselect" tabindex="7">
+          <option value=""></option>
+          <option>American Black Bear</option>
+          <option>Asiatic Black Bear</option>
+          <option>Brown Bear</option>
+          <option>Giant Panda</option>
+          <option selected>Sloth Bear</option>
+          <option>Sun Bear</option>
+          <option>Polar Bear</option>
+          <option>Spectacled Bear</option>
+        </select>
+
+      </div>
+    </div>
+
     <h2>Change / Update Events</h2>
     <div class="side-by-side clearfix">
       <ul>
