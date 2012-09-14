@@ -395,6 +395,12 @@ Copyright (c) 2011 by Harvest
       this.container.mouseleave(function(evt) {
         return _this.mouse_leave(evt);
       });
+      this.container.find(".chzn-single").bind("focus", function(evt) {
+        _this.dropdown.css({
+          "display": "block"
+        });
+        return _this.search_field.focus();
+      });
       this.search_results.mouseup(function(evt) {
         return _this.search_results_mouseup(evt);
       });
