@@ -55,7 +55,7 @@ class Chosen extends AbstractChosen
     @dropdown.css({"width": dd_width  + "px", "top": dd_top + "px"})
 
     if @overflow_container
-      $( @overflow_container ).bind "scroll", (evt) => @update_position(evt)
+      $( @overflow_container ).add( document ).bind "scroll", (evt) => @update_position(evt)
 
     @search_field = @container.find('input').first()
     @search_results = @container.find('ul.chzn-results').first()
@@ -258,11 +258,15 @@ class Chosen extends AbstractChosen
 
   update_position: ->
     if @results_showing
+
       dd_top = if @is_multiple then @container.height() else (@container.height() - 1)
       offset = @container.offset()
+      window_scroll = $(window).scrollTop()
+
       @form_field_jq.trigger("liszt:showing_dropdown", {chosen: this})
+
       @dropdown.css {
-        "top": (offset.top + dd_top) + "px",
+        "top": (offset.top + dd_top - window_scroll) + "px",
         "left": offset.left + "px",
         "width": (@container.outerWidth(true) - 2) + "px", # 2px of border
         "maxHeight": "99999px",
@@ -272,7 +276,7 @@ class Chosen extends AbstractChosen
       @search_results.css("maxHeight", "240px")
 
       # Fix maximum size
-      realDropdownTop = @dropdown.offset().top - $(window).scrollTop()
+      realDropdownTop = @dropdown.offset().top - window_scroll
       maxHeight = $(window).height() - realDropdownTop
       maxHeight = 240 if maxHeight > 240
       maxHeight = 100 if maxHeight < 100
